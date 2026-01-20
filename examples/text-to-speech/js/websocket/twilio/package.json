@@ -1,0 +1,18 @@
+{
+  "name": "murf-twilio-js",
+  "version": "1.0.0",
+  "description": "Real-time text-to-speech integration between Murf AI and Twilio using WebSockets",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node test_call.js"
+  },
+  "keywords": ["murf", "twilio", "tts", "websocket", "voice"],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "twilio": "^5.11.2",
+    "ws": "^8.19.0"
+  }
+}
