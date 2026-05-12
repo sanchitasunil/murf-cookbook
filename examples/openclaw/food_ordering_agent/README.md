@@ -46,7 +46,7 @@ And three API keys (all free tiers work):
 ## Step 1: Clone and install
 
 ```bash
-git clone <repo-url> food-ordering-agent
+git clone <repo-url>
 cd food-ordering-agent
 pnpm install
 cp .env.example .env
