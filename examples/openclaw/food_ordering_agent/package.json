@@ -1,0 +1,26 @@
+{
+  "name": "food-ordering-agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --max-old-space-size=512 --import tsx/esm src/index.ts"
+  },
+  "dependencies": {
+    "@deepgram/sdk": "^5.0.0",
+    "boxen": "^8.0.1",
+    "chalk": "^5.6.2",
+    "decibri": "^3.0.0",
+    "dotenv": "^17.4.1",
+    "node-record-lpcm16": "^1.0.1",
+    "openclaw": "^2026.4.8",
+    "openclaw-murf-tts": "^0.2.8",
+    "ora": "^9.3.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2"
+  }
+}

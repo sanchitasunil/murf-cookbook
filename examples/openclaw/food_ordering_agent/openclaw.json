@@ -1,0 +1,54 @@
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "google/gemini-2.5-flash"
+      },
+      "workspace": "./workspace",
+      "skills": ["swiggy"]
+    }
+  },
+  "models": {
+    "providers": {
+      "google": {
+        "api": "google-generative-ai",
+        "apiKey": "${GEMINI_API_KEY}"
+      },
+      "openrouter": {
+        "apiKey": "${OPENROUTER_API_KEY}"
+      },
+      "opencode": {},
+      "opencode-go": {}
+    }
+  },
+  "skills": {
+    "load": {
+      "extraDirs": ["./skills"]
+    }
+  },
+  "messages": {
+    "tts": {
+      "provider": "murf",
+      "auto": "off",
+      "mode": "final",
+      "providers": {
+        "murf": {
+          "voiceId": "en-IN-anusha",
+          "model": "FALCON",
+          "format": "WAV",
+          "sampleRate": 24000,
+          "locale": "en-IN",
+          "style": "Conversational",
+          "rate": 0,
+          "pitch": 0,
+          "region": "global"
+        }
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "murf-tts": { "enabled": true }
+    }
+  }
+}
