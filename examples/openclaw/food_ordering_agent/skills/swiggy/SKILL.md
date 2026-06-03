@@ -81,14 +81,27 @@ node skills/swiggy/swiggy-cli.js food track [<orderId>]
 - **`food dishes`** returns full item details including `menu_item_id`, variants,
   and addons. Use `dishes` (not `menu`) to get the `menu_item_id` you need for
   `cart-add`.
-- **`cart-add`** in this CLI only supports SIMPLE items — items where both
-  `hasVariants` is false and `hasAddons` is false. For items with variants or
-  addons, you must drive `update_food_cart` directly via mcporter:
-  ```bash
-  mcporter call swiggy-food.update_food_cart --args '<json>'
-  ```
-  with a `cartItems` array carrying the right `variants`/`variantsV2`/`addons`
-  shapes per the schema. Most users won't need this for casual orders.
+- **ALWAYS run `food dishes` before `cart-add`** to get `menu_item_id` and check
+  `hasVariants`. **NEVER ask the user for `menu_item_id`** — always fetch it
+  yourself via `food dishes`.
+- **After running `food dishes`, you MUST read `hasVariants` from the output
+  before attempting `cart-add`.** Do not attempt `cart-add` without this check.
+- **If `cart-add` fails**, the most common cause is a stale cart containing items
+  from a different restaurant. Run `food cart --address-id <id>` to inspect it.
+  If it has items from a different restaurant, run `food cart-clear` and then
+  retry `cart-add`. Do NOT ask the user what to do — handle this automatically.
+- **`cart-add`** works for items where addons are entirely optional. The rules:
+  - `hasVariants: true` → **NEVER call `cart-add`** — it will fail. Tell the
+    user immediately:
+    > "This item comes in different sizes that I can't select for you yet. You
+    >  can add it directly in the Swiggy app, or I can suggest a simpler item."
+    Do not attempt cart-add, do not ask the user for a size — just say this.
+  - `hasVariants: false` AND `hasAddons: true` → **`cart-add` works** as long
+    as all addon groups have `minAddons: 0` (i.e. all optional). The item is
+    added without any addons. You do NOT need to check individual addon groups
+    before calling `cart-add` — just call it. If Swiggy rejects it, tell the
+    user to add it in the app.
+  - `hasVariants: false` AND `hasAddons: false` → `cart-add` works normally.
 
 ## CRITICAL: Safety Rules
 
