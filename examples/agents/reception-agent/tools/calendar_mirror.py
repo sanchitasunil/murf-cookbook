@@ -21,6 +21,12 @@ from config import (
 logger = logging.getLogger(__name__)
 UTC = timezone.utc
 
+# Slot times in Supabase are clinic-local (IST). The calendar event must carry
+# the matching timezone, otherwise events land hours off from the real appointment.
+CLINIC_TZ = "Asia/Kolkata"
+CLINIC_UTC_OFFSET = timedelta(hours=5, minutes=30)
+CLINIC_TZINFO = timezone(CLINIC_UTC_OFFSET)
+
 DOCTOR_CALENDAR_MAP = {
     "Dr. Sarah Lin": GOOGLE_CALENDAR_ID_SARAH,
     "Dr. James Cole": GOOGLE_CALENDAR_ID_JAMES,
@@ -81,7 +87,9 @@ async def create_calendar_event(
         try:
             service = _get_service()
 
-            start = datetime.strptime(f"{iso_date} {iso_time}", "%Y-%m-%d %H:%M").replace(tzinfo=UTC)
+            start = datetime.strptime(f"{iso_date} {iso_time}", "%Y-%m-%d %H:%M").replace(
+                tzinfo=CLINIC_TZINFO
+            )
             end = start + timedelta(minutes=30)
 
             event = {
@@ -91,15 +99,15 @@ async def create_calendar_event(
                     f"Phone: {phone}\n"
                     f"Reason: {reason}\n"
                     f"Booking ref: {booking_id}\n"
-                    f"Booked via: Aria AI Receptionist"
+                    f"Booked via: Matthew AI Receptionist"
                 ),
                 "start": {
                     "dateTime": start.isoformat(),
-                    "timeZone": "UTC",
+                    "timeZone": CLINIC_TZ,
                 },
                 "end": {
                     "dateTime": end.isoformat(),
-                    "timeZone": "UTC",
+                    "timeZone": CLINIC_TZ,
                 },
                 "colorId": "2",
                 "reminders": {

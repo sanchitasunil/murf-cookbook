@@ -24,7 +24,7 @@ async def test_cancel_flow(phone: str):
 
     print("\n[Step 1] AI calls tool with confirmed=False to look up appointment...")
     readback = await cancel_appointment(phone=phone, confirmed=False, context=mock_ctx)
-    print(f"🤖 Aria says: \"{readback}\"")
+    print(f"🤖 Matthew says: \"{readback}\"")
 
     if "I wasn't able to find" in readback:
         print("❌ No appointment found. Make sure to book one first using test_memory.py!")
@@ -35,7 +35,7 @@ async def test_cancel_flow(phone: str):
     if user_input.strip().lower() in ['y', 'yes']:
         print("\n[Step 2] AI calls tool with confirmed=True to execute deletion...")
         result = await cancel_appointment(phone=phone, confirmed=True, context=mock_ctx)
-        print(f"🤖 Aria says: \"{result}\"")
+        print(f"🤖 Matthew says: \"{result}\"")
         print("\n✅ Flow complete! Check your database and WhatsApp.")
     else:
         print("\n❌ Cancellation aborted by user.")
@@ -46,7 +46,7 @@ async def test_reschedule_flow(phone: str):
 
     print("\n[Step 1] AI calls tool with just the phone number to look up appointment...")
     readback = await reschedule_appointment(phone=phone, context=mock_ctx)
-    print(f"🤖 Aria says: \"{readback}\"")
+    print(f"🤖 Matthew says: \"{readback}\"")
 
     if "I wasn't able to find" in readback:
         print("❌ No appointment found. Make sure to book one first using test_memory.py!")
@@ -59,7 +59,7 @@ async def test_reschedule_flow(phone: str):
     proposal = await reschedule_appointment(
         phone=phone, context=mock_ctx, new_date=new_date, new_time=new_time, confirmed=False
     )
-    print(f"\n🤖 Aria says: \"{proposal}\"")
+    print(f"\n🤖 Matthew says: \"{proposal}\"")
 
     if "isn't available" in proposal:
         print("❌ Slot is taken or invalid. Try again.")
@@ -72,7 +72,7 @@ async def test_reschedule_flow(phone: str):
         result = await reschedule_appointment(
             phone=phone, context=mock_ctx, new_date=new_date, new_time=new_time, confirmed=True
         )
-        print(f"🤖 Aria says: \"{result}\"")
+        print(f"🤖 Matthew says: \"{result}\"")
         print("\n✅ Flow complete! Check your database and WhatsApp.")
     else:
         print("\n❌ Reschedule aborted by user.")

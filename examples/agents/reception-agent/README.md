@@ -616,7 +616,7 @@ The `transcript` column is a JSONB array of turns:
 
 ```json
 [
-  {"role": "agent", "text": "Hello, I'm Aria...", "ts": 0.0},
+  {"role": "agent", "text": "Hello, I'm Matthew...", "ts": 0.0},
   {"role": "user",  "text": "Hi, I want to book an appointment", "ts": 3.2}
 ]
 ```

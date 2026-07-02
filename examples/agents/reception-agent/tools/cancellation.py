@@ -273,7 +273,7 @@ async def send_whatsapp_cancellation(
         f"Time: {spoken_time}\n"
         f"Ref: {booking_id}\n"
         f"\n"
-        f"To book a new appointment, call us on {CLINIC_PHONE} or speak to Aria.\n"
+        f"To book a new appointment, call us on {CLINIC_PHONE} or speak to Matthew.\n"
         f"We hope to see you soon.\n"
         f"\n"
         f"— The Clinic"

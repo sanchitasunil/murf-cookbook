@@ -180,7 +180,7 @@ async def _cmd_prompt(phone: str) -> int:
     print()
     print("Example spoken greeting:")
     print(
-        f'  "Hello {example_name}, welcome back to The Clinic. I\'m Aria, '
+        f'  "Hello {example_name}, welcome back to The Clinic. I\'m Matthew, '
         f'your AI receptionist. How can I help you today?"'
     )
     return 0

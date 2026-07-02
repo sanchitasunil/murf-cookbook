@@ -48,7 +48,7 @@ async def test_full_booking(phone: str):
         iso_time=avail["iso_time"]
     )
     
-    print(f"\n🤖 Aria says: \"{result.get('status', 'confirmed').title()}! Your appointment is locked.\"")
+    print(f"\n🤖 Matthew says: \"{result.get('status', 'confirmed').title()}! Your appointment is locked.\"")
     
     print("\n⏳ Waiting 3 seconds to allow background network tasks to finish...")
     await asyncio.sleep(3)
@@ -60,7 +60,7 @@ async def test_full_cancellation(phone: str):
 
     print("\n[Step 1] AI looks up appointment (confirmed=False)...")
     readback = await cancel_appointment(phone=phone, confirmed=False, context=mock_ctx)
-    print(f"🤖 Aria says: \"{readback}\"")
+    print(f"🤖 Matthew says: \"{readback}\"")
 
     if "I wasn't able to find" in readback:
         print("❌ No appointment found. Run the 'book' command first!")
@@ -69,7 +69,7 @@ async def test_full_cancellation(phone: str):
     print("\n[Step 2] User says 'yes', AI executes deletion (confirmed=True)...")
     print("🚀 Firing Supabase updates and Twilio WhatsApp cancellation texts!")
     result = await cancel_appointment(phone=phone, confirmed=True, context=mock_ctx)
-    print(f"🤖 Aria says: \"{result}\"")
+    print(f"🤖 Matthew says: \"{result}\"")
 
     print("\n⏳ Waiting 3 seconds to allow background network tasks to finish...")
     await asyncio.sleep(3)
@@ -81,7 +81,7 @@ async def test_full_reschedule(phone: str):
 
     print("\n[Step 1] AI looks up current appointment...")
     readback = await reschedule_appointment(phone=phone, context=mock_ctx)
-    print(f"🤖 Aria says: \"{readback}\"")
+    print(f"🤖 Matthew says: \"{readback}\"")
 
     if "I wasn't able to find" in readback:
         print("❌ No appointment found. Run the 'book' command first!")
@@ -91,7 +91,7 @@ async def test_full_reschedule(phone: str):
     proposal = await reschedule_appointment(
         phone=phone, context=mock_ctx, new_date="2026-06-05", new_time="10:00", confirmed=False
     )
-    print(f"🤖 Aria says: \"{proposal}\"")
+    print(f"🤖 Matthew says: \"{proposal}\"")
 
     if "isn't available" in proposal:
         print("❌ Proposed slot is taken. Update test parameters.")
@@ -102,7 +102,7 @@ async def test_full_reschedule(phone: str):
     result = await reschedule_appointment(
         phone=phone, context=mock_ctx, new_date="2026-06-05", new_time="10:00", confirmed=True
     )
-    print(f"🤖 Aria says: \"{result}\"")
+    print(f"🤖 Matthew says: \"{result}\"")
 
     print("\n⏳ Waiting 3 seconds to allow background network tasks to finish...")
     await asyncio.sleep(3)

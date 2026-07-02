@@ -51,7 +51,7 @@ async def _cmd_chat():
             result = await search_faq(query)
             elapsed = time.perf_counter() - start_time
 
-            print(f"\nAria's Knowledge Context:\n{result}")
+            print(f"\nMatthew's Knowledge Context:\n{result}")
             print(f"\n[Latency: {elapsed:.3f}s]")
             
         except KeyboardInterrupt:

@@ -135,7 +135,17 @@ async def find_available_slot(
     try:
         result = await asyncio.to_thread(_find_available_slot_sync, doctor, iso_date, iso_time)
         if not result.get("available"):
-            return {"available": False, "next_available": None}
+            # The requested slot is taken/unknown — surface the genuine next
+            # opening (no date/time filter) so callers can be offered a real
+            # alternative instead of a vague "a different time".
+            next_slot = await asyncio.to_thread(_find_available_slot_sync, doctor, None, None)
+            next_available = None
+            if next_slot.get("available"):
+                d_spoken, t_spoken = _spoken_from_iso(
+                    next_slot["iso_date"], next_slot["iso_time"]
+                )
+                next_available = f"{d_spoken} at {t_spoken}"
+            return {"available": False, "next_available": next_available}
 
         iso_d = result["iso_date"]
         iso_t = result["iso_time"]

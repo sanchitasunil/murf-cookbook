@@ -49,6 +49,11 @@ async def book_appointment(
             "message": "No available slots for that doctor. Please try another day or doctor.",
         }
 
+    # Confirm and notify the slot actually reserved, not the caller's free-text
+    # request — the two can differ when iso_date/iso_time are omitted or stale.
+    date = slot.get("date", date)
+    time = slot.get("time", time)
+
     reserved = await reserve_slot(
         slot_id=slot["slot_id"],
         patient_name=patient_name,
