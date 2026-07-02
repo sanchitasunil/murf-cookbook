@@ -50,8 +50,10 @@ A fully autonomous voice agent designed to handle inbound clinic calls, schedule
 ### Clone
 
 ```bash
-git clone <repo-url>
-cd reception-agent
+git clone --filter=blob:none --sparse https://github.com/murf-ai/murf-cookbook.git
+cd murf-cookbook
+git sparse-checkout set examples/agents/reception-agent
+cd examples/agents/reception-agent
 ```
 
 ### Create a virtual environment

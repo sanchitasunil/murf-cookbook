@@ -48,8 +48,8 @@ And three API keys (all free tiers work):
 ```bash
 git clone --filter=blob:none --sparse https://github.com/murf-ai/murf-cookbook.git
 cd murf-cookbook
-git sparse-checkout set examples/openclaw/food_ordering_agent
-cd examples/openclaw/food_ordering_agent
+git sparse-checkout set examples/agents/food_ordering_agent
+cd examples/agents/food_ordering_agent
 cp .env.example .env
 pnpm install
 ```
