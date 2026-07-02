@@ -1,0 +1,19 @@
+{
+  "sipDispatchRuleId": "SDR_Ct6KB2p5yhZw",
+  "rule": {
+    "dispatchRuleIndividual": {
+      "roomPrefix": "clinic-"
+    }
+  },
+  "trunkIds": [
+    "ST_Yo7YC6VngvcW"
+  ],
+  "name": "clinic",
+  "roomConfig": {
+    "agents": [
+      {
+        "agentName": "clinic-agent"
+      }
+    ]
+  }
+}
